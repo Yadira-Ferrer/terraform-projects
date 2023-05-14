@@ -1,1 +1,1 @@
-# terraform-projects
+# Terraform Projects
