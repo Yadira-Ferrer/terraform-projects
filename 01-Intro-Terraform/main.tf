@@ -1,20 +1,15 @@
 terraform {
   required_providers {
     aws = {
-        source = "hashicorp/aws",
-        version = "~> 4.0"
+      source = "hashicorp/aws",
+      version = "~> 4.0"
     }
-  }
-  backend "s3" {
-    bucket = "mybucket"
-    key = "path/to/my/key"
-    region = "us-east-1"
   }
 }
 
 # Configuration of AWS Provider
 provider "aws" {
-    region = "us-east-1"
+    region = "us-west-2"
 }
 
 # Configuration of VPC
@@ -32,7 +27,6 @@ resource "aws_subnet" "yf_public_subnet" {
   tags = {
     Name = "yf-tf-public-1"
   }
-  
 }
 
 # terraform destroy -> delete all the infraestructure created.
