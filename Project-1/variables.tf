@@ -6,6 +6,6 @@ variable "vpc_module" {
   description = "Set of variables for VPC module"
 }
 
-/* variable "launch_template_module" {
+variable "launch_template_module" {
   description = "Set of variables for Launch Template"
-} */
+}
