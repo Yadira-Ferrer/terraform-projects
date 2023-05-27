@@ -22,6 +22,8 @@ resource "aws_launch_template" "yf_lt" {
   }
 
   tags = merge(local.tags, { Name : "yf-launch-template" })
+
+  user_data = filebase64("${path.module}/init.sh")
 }
 
 # INSTANCE PROFILE definition

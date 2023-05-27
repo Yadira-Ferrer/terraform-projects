@@ -13,4 +13,11 @@ module "launch_template" {
   project_name  = var.project_name
 }
 
+module "asg" {
+  source       = "./modules/asg"
+  lc_id        = module.launch_template.lc_id
+  subnets      = module.vpc.private_subnets
+  project_name = var.project_name
+}
+
 # terraform apply -var-file="variables/input.tfvars"
