@@ -10,6 +10,6 @@ variable "launch_template_module" {
   description = "Set of variables for Launch Template"
 }
 
-/* variable "alb_module" {
-  description = "Set of variable for Application Load Balancer"
-} */
+variable "route53_module" {
+  description = "Set of variable for Route53"
+}

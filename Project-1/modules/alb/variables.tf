@@ -14,3 +14,7 @@ variable "ecs_sg" {
 variable "subnets" {
   type = list(string)
 }
+
+variable "acm_certificate" {
+  description = "Arn of ACM certificate"
+}

@@ -5,11 +5,12 @@ module "vpc" {
 }
 
 module "alb" {
-  source       = "./modules/alb"
-  vpc_id       = module.vpc.vpc_id
-  ecs_sg       = module.launch_template.ecs_sg
-  subnets      = module.vpc.public_subnets
-  project_name = var.project_name
+  source          = "./modules/alb"
+  vpc_id          = module.vpc.vpc_id
+  ecs_sg          = module.launch_template.ecs_sg
+  subnets         = module.vpc.public_subnets
+  acm_certificate = module.route53.acm_cert_validation
+  project_name    = var.project_name
 }
 
 module "launch_template" {
@@ -27,6 +28,14 @@ module "asg" {
   alb_id       = module.alb.alb_id
   tg_arn       = module.alb.target_group_arns
   subnets      = module.vpc.private_subnets
+  project_name = var.project_name
+}
+
+module "route53" {
+  source       = "./modules/route53"
+  alb_dns      = module.alb.alb_dns
+  alb_zone_id  = module.alb.alb_zone_id
+  zone_id      = var.route53_module["zone_id"]
   project_name = var.project_name
 }
 
