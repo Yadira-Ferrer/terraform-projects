@@ -1,3 +1,5 @@
+# LAUNCH TEMPLATE Variables
+
 variable "vpc_id" {
   description = "ID of the VPC where EC2 instances will be launched"
 }

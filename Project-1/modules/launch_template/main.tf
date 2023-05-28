@@ -18,7 +18,7 @@ resource "aws_launch_template" "yf_lt" {
     associate_public_ip_address = true
     delete_on_termination       = true
     device_index                = 0
-    security_groups             = [aws_security_group.allow_tls.id]
+    security_groups             = [aws_security_group.ecs_sg.id]
   }
 
   tags = merge(local.tags, { Name : "yf-launch-template" })
@@ -52,31 +52,15 @@ resource "aws_iam_role" "role" {
 }
 
 # SECURITY GROUP definition
-resource "aws_security_group" "allow_tls" {
-  name        = "${var.project_name}-sg"
+resource "aws_security_group" "ecs_sg" {
+  name        = "${var.project_name}-ecs-sg"
   description = "Allow TLS inbound traffic"
   vpc_id      = var.vpc_id
 
   ingress {
     description = "TLS from VPC"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "TLS from VPC"
     from_port   = 80
     to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "SSH Access"
-    from_port   = 22
-    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -88,5 +72,5 @@ resource "aws_security_group" "allow_tls" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.tags, { Name : "yf-sg" })
+  tags = merge(local.tags, { Name : "yf-ecs-sg" })
 }

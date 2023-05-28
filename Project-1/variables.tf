@@ -9,3 +9,7 @@ variable "vpc_module" {
 variable "launch_template_module" {
   description = "Set of variables for Launch Template"
 }
+
+/* variable "alb_module" {
+  description = "Set of variable for Application Load Balancer"
+} */
