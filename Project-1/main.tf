@@ -7,7 +7,6 @@ module "vpc" {
 module "alb" {
   source          = "./modules/alb"
   vpc_id          = module.vpc.vpc_id
-  ecs_sg          = module.launch_template.ecs_sg
   subnets         = module.vpc.public_subnets
   acm_certificate = module.route53.acm_cert_validation
   project_name    = var.project_name
@@ -16,6 +15,7 @@ module "alb" {
 module "launch_template" {
   source        = "./modules/launch_template"
   vpc_id        = module.vpc.vpc_id
+  efs_dns       = module.efs.efs_dns
   instance_type = var.launch_template_module["instance_type"]
   disk_size     = var.launch_template_module["disk_size"]
   ami           = var.launch_template_module["ami"]
@@ -37,6 +37,14 @@ module "route53" {
   alb_zone_id  = module.alb.alb_zone_id
   zone_id      = var.route53_module["zone_id"]
   project_name = var.project_name
+}
+
+module "efs" {
+  source          = "./modules/efs"
+  subnets         = module.vpc.private_subnets
+  ec2_sg          = module.launch_template.ec2_sg
+  ec2_private_key = module.launch_template.private_key
+  project_name    = var.project_name
 }
 
 # terraform apply -var-file="variables/input.tfvars"

@@ -28,3 +28,7 @@ variable "disk_size" {
     error_message = "The disk_size has to be grater than 8GB"
   }
 }
+
+variable "efs_dns" {
+  description = "DNS of the EFS file system"
+}
