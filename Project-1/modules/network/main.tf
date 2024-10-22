@@ -11,8 +11,9 @@ data "aws_availability_zones" "available" {
 
 # VPC definition
 resource "aws_vpc" "vpc_yf" {
-  cidr_block = var.vpc_cidr
-  tags       = merge(local.tags, { Name = "vpc-yf" })
+  cidr_block           = var.vpc_cidr
+  enable_dns_hostnames = true
+  tags                 = merge(local.tags, { Name = "vpc-yf" })
 }
 
 # SUBNETS definitions

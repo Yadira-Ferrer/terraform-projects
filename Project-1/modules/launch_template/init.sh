@@ -9,4 +9,3 @@ chkconfig nginx on
 sudo git clone https://github.com/Yadira-Ferrer/html-basic-page.git 
 sudo cp html-basic-page/* /usr/share/nginx/html/ -R
 
-#echo "<h3>MY PROJECT WORKS!!!</h3>" > /usr/share/nginx/html/index.html
